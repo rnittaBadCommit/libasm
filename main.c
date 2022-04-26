@@ -4,8 +4,10 @@
 
 size_t ft_strlen(char *s);
 char *ft_strcpy(char *s1, const char *s2);
+int	ft_strcmp(const char *s1, const char *s2);
 
-#define TEST_NUM 3
+#define S1_NUM 5
+#define S2_NUM 6
 #define STRLEN(x) (printf("%s", (strlen(x) == ft_strlen(x) ? "OK\n" : ft_catcpy("NO: ft_strlen, ", x))))
 #define STRCPY(x) 
 
@@ -41,7 +43,7 @@ int	check_strlen(char *s)
 		return (case_ok());
 	else
 	{
-		printf("NO: ft_strlen(%s)  actual: %ud, expected: %d\n", s, actual, expected);
+		printf("NO: ft_strlen(\"%s\")  actual: %ud, expected: %d\n", s, actual, expected);
 		return (-1);
 	}
 }
@@ -58,21 +60,41 @@ int	check_strcpy(char *s)
 		return (case_ok());
 	else
 	{
-		printf("NO: ft_strcpy(%s)  \nactual return:\t\t%p, actual dest:\t%s\nexpected return:\t%p, expected dest:\t%s\n", s, ret, dst, dst, s);
+		printf("NO: ft_strcpy(\"%s\")  \nactual return:\t\t%p, actual dest:\t%s\nexpected return:\t%p, expected dest:\t%s\n", s, ret, dst, dst, s);
 		return (-1);
 	}
 }
 
+int	check_strcmp(char *s1, char *s2)
+{
+	int	actual;
+	int	expected;
+
+	actual = ft_strcmp(s1, s2);
+	expected = strcmp(s1, s2);
+	if (actual == expected)
+		return (case_ok());
+	else
+	{
+		printf("NO: ft_strcmp(\"%s\", \"%s\")  actual: %d, expected: %d\n", s1, s2, actual, expected);
+		return (-1);
+	}
+}
 
 int main()
 {
-	char	s[][11] = {"0123456789", "a", ""};
+	char	s1[][11] = {"0123456789", "a", "", "\200", "\200abc\200", "\0", "\255"};
+	char	s2[][11] = {"0123456788", "a", "b", "", "\201", "\200abc\201", "\0", "\255"};
 	int		i;
+	int		j;
 
 	i = -1;
-	while (++i < TEST_NUM)
+	while (++i < S1_NUM)
 	{
-		check_strlen(s[i]);
-		check_strcpy(s[i]);
+		check_strlen(s1[i]);
+		check_strcpy(s1[i]);
+		j = -1;
+		while (++j < S2_NUM)
+			check_strcmp(s1[1], s2[j]);
 	}
 }
