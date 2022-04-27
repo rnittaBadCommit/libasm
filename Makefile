@@ -1,4 +1,4 @@
-NAME=./a.out
+NAME=libasm
 SRCS=ft_strlen.s ft_strcpy.s ft_strcmp.s ft_write.s ft_strdup.s ft_atoi_base.s test.s
 OBJS=$(SRCS:.s=.o)
 NASM_FLAG=-f macho64
@@ -6,6 +6,7 @@ NASM_FLAG=-f macho64
 all:	$(NAME)
 
 $(NAME):	$(OBJS)
+	ar rcs $(NAME) $(OBJS)
 
 %.o:	%.s
 	nasm $(NASM_FLAG) $<
