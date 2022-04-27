@@ -104,8 +104,10 @@ int	check_strdup(char *s)
 
 int main()
 {
-	char	s1[][11] = {"0123456789", "a", "", "\200", "\200abc\200", "\0", "\255"};
-	char	s2[][11] = {"0123456788", "a", "b", "asdf", "", "\201", "\200abc\201", "\0", "\255"};
+//	char	s1[][11] = {"0123456789", "a", "", "\200", "\200abc\200", "\0", "\255"};
+//	char	s2[][11] = {"0123456788", "a", "b", "asdf", "", "\201", "\200abc\201", "\0", "\255"};
+	char	s1[][11] = {"", "", "", "", "", "", ""};
+	char	s2[][11] = {"asdf", "asdf", "asdf", "asdf", "asdf", "asdf", "asdf", "asdf", "asdf"};
 	int		i;
 	int		j;
 	int		f;
@@ -128,6 +130,6 @@ int main()
 
 
 
-	printf("%d\n", ft_strcmp("", "asdf"));
-	printf("%d\n", strcmp("", "asdf"));
+	printf("ft_strcmp: %d\n", ft_strcmp("", "asdf"));
+	printf("strcmp: %d\n", strcmp("", "asdf"));
 }
