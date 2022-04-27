@@ -5,55 +5,57 @@ _ft_atoi_base:
 
 _base_check:
 	mov	r8, 1	;r8: save negative
-	mov	rcx, rsi
-	dec	rcx
+	mov	rcx, -1
 
 .basecheck_mainloop:
 	inc	rcx
-	mov	dl,	BYTE[rcx]
+	mov	dl,	BYTE[rsi + rcx]
 	cmp	dl, 0
 	je	.basecheck_length
 	cmp	dl, 9
 	jb	.basetmpok
 	cmp	dl, 32
-	je	.baseerr
+	je	.return_zero
 	cmp	dl, 43
-	je	.baseerr
+	je	.return_zero
 	cmp	dl, 45
-	je	.baseerr
+	je	.return_zero
 	cmp	dl, 14
-	jb	.baseerr
+	jb	.return_zero
 	
 .basetmpok:
 	mov	rax, rcx
+	add	rax, rsi
 	inc	rax
 
 .basecheck_tmploop:
 	mov	dl, BYTE[rax]
 	cmp	dl, 0
 	je	.basecheck_mainloop
-	cmp	dl, BYTE[rcx]
-	je	.baseerr
+	cmp	dl, BYTE[rsi + rcx]
+	je	.return_zero
 	inc	rax
 	jmp	.basecheck_tmploop
 
-.baseerr:
+.return_zero:
 	xor	rax, rax
-	mov	rax, -1
 	ret
 
 .basecheck_length:
 	cmp	rcx, 2
-	jb	.baseerr
+	jb	.return_zero
+
 	mov	r11, rcx	;r11:	b
 
 ;skip	space
 
-	mov	rcx, rsi
+	mov	rcx, rdi
 	dec	rcx
 .skipspace_loop:
 	inc	rcx
 	mov	dl, [rcx]
+	cmp	dl, 0
+	je	.return_zero
 	cmp	dl, 9
 	jb	.sign
 	cmp	dl, 14
@@ -65,13 +67,15 @@ _base_check:
 .sign:
 	inc	rcx
 	mov	dl, BYTE[rcx]
+	cmp	dl, 0
+	je	.return_zero
 	cmp	dl, 43
 	je	.sign
 	cmp	dl, 45
 	je	.negative
 	xor	rax, rax
-
 	xor	r9, r9
+
 .main:
 	cmp dl, 0
 	je	.return
@@ -79,8 +83,8 @@ _base_check:
 	xor	r9, r9
 .main_loop2:
 	cmp	r9, r11
-	jmp	.return
-	cmp	dl, BYTE[rdi + r9]
+	je	.return
+	cmp	dl, BYTE[rsi + r9]
 	je	.main_tmp
 	inc	r9
 	jmp	.main_loop2
