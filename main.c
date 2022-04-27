@@ -74,7 +74,7 @@ int	check_strcmp(char *s1, char *s2)
 
 	actual = ft_strcmp(s1, s2);
 	expected = strcmp(s1, s2);
-	if (actual == expected && 0)
+	if (actual == expected)
 		return (case_ok());
 	else
 	{
@@ -127,9 +127,4 @@ int main()
 		printf("\n\n==========ALL OK!===========\n\n");
 	else
 		printf("\n\n==========NOT OK===========\n\n");
-
-
-
-	printf("ft_strcmp: %d\n", ft_strcmp("", "asdf"));
-	printf("strcmp: %d\n", strcmp("", "asdf"));
 }
