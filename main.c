@@ -9,7 +9,7 @@ int	ft_write(int fd, char *, int i);
 char	*ft_strdup(char *s);
 
 #define S1_NUM 5
-#define S2_NUM 6
+#define S2_NUM 7
 #define STRLEN(x) (printf("%s", (strlen(x) == ft_strlen(x) ? "OK\n" : ft_catcpy("NO: ft_strlen, ", x))))
 #define STRCPY(x) 
 
@@ -74,7 +74,7 @@ int	check_strcmp(char *s1, char *s2)
 
 	actual = ft_strcmp(s1, s2);
 	expected = strcmp(s1, s2);
-	if (actual == expected)
+	if (actual == expected && 0)
 		return (case_ok());
 	else
 	{
@@ -105,7 +105,7 @@ int	check_strdup(char *s)
 int main()
 {
 	char	s1[][11] = {"0123456789", "a", "", "\200", "\200abc\200", "\0", "\255"};
-	char	s2[][11] = {"0123456788", "a", "b", "", "\201", "\200abc\201", "\0", "\255"};
+	char	s2[][11] = {"0123456788", "a", "b", "asdf", "", "\201", "\200abc\201", "\0", "\255"};
 	int		i;
 	int		j;
 	int		f;
@@ -114,16 +114,20 @@ int main()
 	f = 0;
 	while (++i < S1_NUM)
 	{
-		f &= !!check_strlen(s1[i]);
-		f &= !!check_strcpy(s1[i]);
+		f |= !!check_strlen(s1[i]);
+		f |= !!check_strcpy(s1[i]);
 		j = -1;
 		while (++j < S2_NUM)
-			f &= !!check_strcmp(s1[1], s2[j]);
-		f &= !!check_strdup(s1[i]);
+			f |= !!check_strcmp(s1[i], s2[j]);
+		f |= !!check_strdup(s1[i]);
 	}
-	f &= !!printf("%s", (ft_write(2, "abcdef", 6) == 6) ? "OK\n" : "NO: ft_write(1, \"abcdef\", 6)\n");
 	if (!f)
 		printf("\n\n==========ALL OK!===========\n\n");
 	else
 		printf("\n\n==========NOT OK===========\n\n");
+
+
+
+	printf("%d\n", ft_strcmp("", "asdf"));
+	printf("%d\n", strcmp("", "asdf"));
 }
