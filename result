@@ -1,0 +1,138 @@
+make --no-print-directory -C ../ all
+make[1]: Nothing to be done for `all'.
+gcc -o runtest main.o helper.o test/ft_strlen_test.o test/ft_strcpy_test.o test/ft_strcmp_test.o test/ft_write_test.o test/ft_read_test.o test/ft_strdup_test.o -L../ -lasm
+./runtest 2> /dev/null | python3 prettier.py
+[H[2J
+
+ft_strlen.s: [32m[OK] [0m[32m[OK] [0m[32m[OK] [0m[32m[OK] [0m[32m[OK] [0m[32m[OK] [0m[32m[OK] [0m[32m[OK] [0m[32m[OK] [0m[32m[OK] [0m[32m[OK] [0m[32m[OK] [0m
+
+ft_strcpy.s: [32m[OK] [0m[32m[OK] [0m[32m[OK] [0m[32m[OK] [0m[32m[OK] [0m[32m[OK] [0m[32m[OK] [0m[32m[OK] [0m[32m[OK] [0m[32m[OK] [0m[32m[OK] [0m[32m[OK] [0m
+
+ft_strcmp.s: [32m[OK] [0m[32m[OK] [0m[32m[OK] [0m[32m[OK] [0m[32m[OK] [0m[32m[OK] [0m[32m[OK] [0m[32m[OK] [0m[32m[OK] [0m[32m[OK] [0m[32m[OK] [0m[32m[OK] [0m[32m[OK] [0m[32m[OK] [0m
+             [32m[OK] [0m[32m[OK] [0m[32m[OK] [0m[32m[OK] [0m[31m[KO] [0m[32m[OK] [0m[32m[OK] [0m[32m[OK] [0m[31m[KO] [0m[32m[OK] [0m[32m[OK] [0m[32m[OK] [0m[32m[OK] [0m[32m[OK] [0m[32m[OK] [0m
+             [32m[OK] [0m[32m[OK] [0m[32m[OK] [0m[32m[OK] [0m[32m[OK] [0m[32m[OK] [0m[32m[OK] [0m[31m[KO] [0m[31m[KO] [0m[31m[KO] [0m[31m[KO] [0m[31m[KO] [0m[31m[KO] [0m[31m[KO] [0m[31m[KO] [0m
+             [31m[KO] [0m[31m[KO] [0m[31m[KO] [0m[31m[KO] [0m
+
+ft_write.s: [32m[OK] [0m[32m[OK] [0m[32m[OK] [0m[32m[OK] [0m[32m[OK] [0m[32m[OK] [0m[32m[OK] [0m[32m[OK] [0m[32m[OK] [0m[32m[OK] [0m[32m[OK] [0m[32m[OK] [0m[32m[OK] [0m[32m[OK] [0m
+            [32m[OK] [0m[32m[OK] [0m[32m[OK] [0m[31m[KO] [0m[31m[KO] [0m[31m[KO] [0m[31m[KO] [0m[31m[KO] [0m[31m[KO] [0m[31m[KO] [0m[31m[KO] [0m[31m[KO] [0m[31m[KO] [0m[31m[KO] [0m[31m[KO] [0m
+
+ft_read.s: [32m[OK] [0m[32m[OK] [0m[32m[OK] [0m[32m[OK] [0m[32m[OK] [0m[32m[OK] [0m[32m[OK] [0m[32m[OK] [0m[32m[OK] [0m[32m[OK] [0m[32m[OK] [0m[32m[OK] [0m[32m[OK] [0m[31m[KO] [0m
+           [31m[KO] [0m[31m[KO] [0m[31m[KO] [0m[31m[KO] [0m[31m[KO] [0m[31m[KO] [0m[31m[KO] [0m[31m[KO] [0m[31m[KO] [0m[31m[KO] [0m[31m[KO] [0m
+
+ft_strdup.s: [32m[OK] [0m[32m[OK] [0m[32m[OK] [0m[32m[OK] [0m[32m[OK] [0m[32m[OK] [0m[32m[OK] [0m[32m[OK] [0m[32m[OK] [0m[32m[OK] [0m[32m[OK] [0m[32m[OK] [0m[32m[OK] [0m[32m[OK] [0m
+             [32m[OK] [0m[32m[OK] [0m
+
+ft_strcmp.s :
+    [32mexpected: [0m-1
+    [31mactual: [0m0 with: "", "asdf"
+ft_strcmp.s :
+    [32mexpected: [0m-1
+    [31mactual: [0m0 with: "the\0hidden", "thehidden"
+ft_strcmp.s :
+    [32mexpected: [0m-1
+    [31mactual: [0m0 with: "\x01", "\x01\x01"
+ft_strcmp.s :
+    [32mexpected: [0m-1
+    [31mactual: [0m0 with: "\x01", "\x01\x02"
+ft_strcmp.s :
+    [32mexpected: [0m-1
+    [31mactual: [0m0 with: "\x02", "\x02\x01"
+ft_strcmp.s :
+    [32mexpected: [0m-1
+    [31mactual: [0m0 with: "\xff", "\xff\xff"
+ft_strcmp.s :
+    [32mexpected: [0m-1
+    [31mactual: [0m0 with: "\xff", "\xff\xfe"
+ft_strcmp.s :
+    [32mexpected: [0m-1
+    [31mactual: [0m0 with: "\xfe", "\xfe\xff"
+ft_strcmp.s :
+    [32mexpected: [0m-1
+    [31mactual: [0m0 with: "\x01", "\x01\x01"
+ft_strcmp.s :
+    [32mexpected: [0m-1
+    [31mactual: [0m0 with: "\x01", "\x01\x02"
+ft_strcmp.s :
+    [32mexpected: [0m-1
+    [31mactual: [0m0 with: "\x02", "\x02\x01"
+ft_strcmp.s :
+    [32mexpected: [0m-1
+    [31mactual: [0m0 with: "\xff", "\xff\xff"
+ft_strcmp.s :
+    [32mexpected: [0m-1
+    [31mactual: [0m0 with: "\xff", "\xff\xfe"
+ft_strcmp.s :
+    [32mexpected: [0m-1
+    [31mactual: [0m0 with: "\xfe", "\xfe\xff"
+ft_write.s :
+    [32mexpected: [0m-1
+    [31mactual: [0m14 with: 1 NULL, 3
+ft_write.s :
+    [32mexpected: [0m-1
+    [31mactual: [0m9 with: -1 "bonjour", 7
+ft_write.s :
+    [32mexpected: [0m-1
+    [31mactual: [0m9 with: 42 "bonjour", 7
+ft_write.s :
+    [32mexpected: [0m-1
+    [31mactual: [0m9 with: 9809 "bonjour", 7
+ft_write.s :
+    [32mexpected: [0m-1
+    [31mactual: [0m9 with: 98123 "", 1
+ft_write.s :
+    [32mexpected: [0m-1
+    [31mactual: [0m9 with: 42 NULL, 7
+ft_write.s :
+    [32mexpected: [0m-1
+    [31mactual: [0m14 with: 1 NULL, 3
+ft_write.s :
+    [32mexpected: [0m-1
+    [31mactual: [0m9 with: -1 "bonjour", 7
+ft_write.s :
+    [32mexpected: [0m-1
+    [31mactual: [0m9 with: 42 "bonjour", 7
+ft_write.s :
+    [32mexpected: [0m-1
+    [31mactual: [0m9 with: 9809 "bonjour", 7
+ft_write.s :
+    [32mexpected: [0m-1
+    [31mactual: [0m9 with: 98123 "", 1
+ft_write.s :
+    [32mexpected: [0m-1
+    [31mactual: [0m9 with: 42 NULL, 7
+ft_read.s :
+    [32mexpected: [0m-1
+    [31mactual: [0m14 with: 3 NULL 3
+ft_read.s :
+    [32mexpected: [0m-1
+    [31mactual: [0m9 with: -1 buf 7
+ft_read.s :
+    [32mexpected: [0m-1
+    [31mactual: [0m9 with: 42 buf 7
+ft_read.s :
+    [32mexpected: [0m-1
+    [31mactual: [0m9 with: 9809 buf 7
+ft_read.s :
+    [32mexpected: [0m-1
+    [31mactual: [0m9 with: 98123 buf 1
+ft_read.s :
+    [32mexpected: [0m-1
+    [31mactual: [0m9 with: 42 NULL 7
+ft_read.s :
+    [32mexpected: [0m-1
+    [31mactual: [0m14 with: 3 NULL 3
+ft_read.s :
+    [32mexpected: [0m-1
+    [31mactual: [0m9 with: -1 buf 7
+ft_read.s :
+    [32mexpected: [0m-1
+    [31mactual: [0m9 with: 42 buf 7
+ft_read.s :
+    [32mexpected: [0m-1
+    [31mactual: [0m9 with: 9809 buf 7
+ft_read.s :
+    [32mexpected: [0m-1
+    [31mactual: [0m9 with: 98123 buf 1
+ft_read.s :
+    [32mexpected: [0m-1
+    [31mactual: [0m9 with: 42 NULL 7
